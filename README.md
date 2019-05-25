@@ -1,5 +1,5 @@
 # hiddenSensor
-webdir scan，it work for ctf and actual combat
+webdir scan，it works for ctf and actual combat
 
 #### 1. 支持平台      
 **macOS|Linux|Windows**  

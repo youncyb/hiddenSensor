@@ -1,8 +1,7 @@
 import sys
 sys.path.append('../../')
 
-import thirdparty.requests as requests
-#import requests
+import requests
 import urllib
 import socket
 import random

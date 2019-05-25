@@ -18,8 +18,7 @@ class Fuzzer(object):
         self.requester = requester
         self.path = path
         self.suffix = ['php', 'jsp', 'asp']
-        self.redirection_code = [
-            '[<Response [301]>]', '[<Response [302]>]', '[<Response [303]>]', '[<Response [307]>]']
+        self.redirection_code = ['301', '302', '303', '307']
         self.base_ratio = 0.98
         self.flag = False
         self.redirection_regexp = []
@@ -51,6 +50,11 @@ class Fuzzer(object):
         url_parser = urllib.parse.urlparse(url)
         return url_parser.scheme + '://' + url_parser.netloc
 
+    def getHistory(self, history):
+        history = re.findall('\d+', history)
+        history = history[0] if len(history) >= 1 else []
+        return str(history)
+
     def setup(self):
         if self.path is None or self.path is '':
             self.path = self.getRandomPath()
@@ -74,19 +78,23 @@ class Fuzzer(object):
             self.flag = True
         else:
 
-            if str(res1_php.history) in self.redirection_code and str(res2_php.history) in self.redirection_code:
-                self.redirection_regexp.append(self.generateRedirectRegExp(
-                    res1_php.url, res2_php.url))
+            if self.getHistory(str(res1_php.history)) in self.redirection_code and self.getHistory(str(res2_php.history)) in self.redirection_code:
+                regExp = self.generateRedirectRegExp(
+                    res1_php.url, res2_php.url)
+                self.redirection_regexp.append(
+                    regExp) if regExp not in self.redirection_regexp else 0
 
-            if str(res1_jsp.history) in self.redirection_code and str(res2_jsp.history) in self.redirection_code:
+            if self.getHistory(str(res1_jsp.history)) in self.redirection_code and self.getHistory(str(res2_jsp.history)) in self.redirection_code:
                 regExp = self.generateRedirectRegExp(
                     res1_jsp.url, res2_jsp.url)
-                self.redirection_regexp.append(regExp)
+                self.redirection_regexp.append(
+                    regExp) if regExp not in self.redirection_regexp else 0
 
-            if str(res1_asp.history) in self.redirection_code and str(res2_asp.history) in self.redirection_code:
+            if self.getHistory(str(res1_asp.history)) in self.redirection_code and self.getHistory(str(res2_asp.history)) in self.redirection_code:
                 regExp = self.generateRedirectRegExp(
                     res1_asp.url, res2_asp.url)
-                self.redirection_regexp.append(regExp)
+                self.redirection_regexp.append(
+                    regExp) if regExp not in self.redirection_regexp else 0
 
             if res1_asp.status_code == 404 and res1_php.status_code == 404 and res1_jsp.status_code == 404:
                 self.flag = True

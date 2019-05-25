@@ -106,7 +106,7 @@ class CLIOutput(object):
             contentLength = None
             status = response.status_code
             temp = re.findall('\d+', str(response.history))
-            history = int(temp[0]) if len(temp) == 1 else 0
+            history = int(temp[0]) if len(temp) >= 1 else 0
             if history != 0:
                 status = history
 

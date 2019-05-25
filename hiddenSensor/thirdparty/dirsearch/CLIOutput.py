@@ -4,7 +4,7 @@ import sys
 import platform
 import urllib.parse
 import re
-from colorama import *
+from thirdparty.colorama import *
 from .TerminalSize import get_terminal_size
 
 import os

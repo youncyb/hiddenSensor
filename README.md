@@ -6,6 +6,7 @@ webdir scan，it works for ctf and actual combat
 **python3**
 
 #### 2. 用法    
+**python3 -m pip install requests**
 ```
 usage: hiddenSensor.py [-h] [-u URL] [-L URLLIST] [-e EXTENSION] [-H HEADERS]
                        [--user-agent USER_AGENT] [--random-agent] [-c COOKIES]

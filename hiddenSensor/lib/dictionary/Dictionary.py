@@ -49,7 +49,7 @@ class Dictionary(object):
         return path
 
     def addSensor(self, path):
-        if path.endswith('/'):
+        if path.endswith('/') or path.endswith('xml') or path.endswith('html'):
             return
         path = path.lstrip('/')
         if path not in self.sensor:

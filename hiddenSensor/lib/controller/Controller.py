@@ -57,7 +57,7 @@ class Controller(object):
             self.output.error('\nexit by user')
             exit(0)
         finally:
-            self.output.warning('Scanning Over!')
+            self.output.warning('Scanning Over! Results stores in report folder')
 
     def recursive_path(self, url):
         if self.recursive >= 1:

@@ -138,10 +138,18 @@ class CLIOutput(object):
 
             check_sensor = path.rsplit('.', 1)
 
-            if len(check_sensor) >= 2:
-                if check_sensor[1] in ['un~', 'rar', 'zip', '7z', 'gz', 'xz', 'bak', 'tar', 'swp', 'swn', 'swo', 'swl', 'swm', 'bak~', 'back'] or check_sensor[1].endswith('~') or check_sensor[1].endswith('~1') or check_sensor[1].endswith('~2') or check_sensor[1].endswith('~3'):
-                    if 'application/octet-stream' not in response.headers['content-type']:
-                        return
+            try:
+
+                if len(check_sensor) >= 2:
+                    if check_sensor[1] in ['un~', 'rar', 'zip', '7z', 'gz', 'xz', 'bak', 'tar', 'swp', 'swn', 'swo', 'swl', 'swm', 'bak~', 'back'] or check_sensor[1].endswith('~') or check_sensor[1].endswith('~1') or check_sensor[1].endswith('~2') or check_sensor[1].endswith('~3'):
+                        if 'last-modified' in response.headers:
+                            pass
+                        elif 'text/plain' in response.headers['content-type']:
+                            pass
+                        elif 'application' not in response.headers['content-type']:
+                            return
+            except KeyError:
+                pass
 
             if status == 200:
                 message = Fore.GREEN + message + Style.RESET_ALL

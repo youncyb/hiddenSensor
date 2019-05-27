@@ -144,7 +144,7 @@ class Fuzzer(object):
             ratio_asp = self.dynamic_asp.compareTo(cmp_page.text)
             if self.base_ratio <= ratio_php or self.base_ratio <= ratio_jsp or self.base_ratio <= ratio_asp:
                 return False
-            elif any(redirectToInvalid) and ((self.ratio - 0.15) <= ratio_php or (self.ratio - 0.15) <= ratio_jsp or (self.ratio - 0.15) <= ratio_asp):
+            elif any(redirectToInvalid) and ((self.base_ratio - 0.15) <= ratio_php or (self.base_ratio - 0.15) <= ratio_jsp or (self.base_ratio - 0.15) <= ratio_asp):
                 return False
             return True
 
@@ -153,3 +153,4 @@ if __name__ == '__main__':
     req = Requester('https://www.baidu.com/')
     fuzzer = Fuzzer(req)
     print(fuzzer.fuzz(requests.get('https://www.baidu.com/hello.php')))
+

@@ -146,6 +146,9 @@ class CLIOutput(object):
                             pass
                         elif 'text/plain' in response.headers['content-type']:
                             pass
+                        elif 'content-disposition' in response.headers.keys():
+                            if 'attachment' in response.headers['content-disposition']:
+                                pass
                         elif 'application' not in response.headers['content-type']:
                             return
             except KeyError:

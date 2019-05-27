@@ -49,6 +49,8 @@ class Dictionary(object):
         return path
 
     def addSensor(self, path):
+        if path.endswith('/'):
+            return
         path = path.lstrip('/')
         if path not in self.sensor:
             sensor_file = []
@@ -82,3 +84,4 @@ if __name__ == '__main__':
     dictionary = Dictionary(
         '/Users/youncyb/Desktop/Tools/dirsearch-master/db/dicc.txt')
     print(dictionary.dicts, len(dictionary), next(dictionary))
+

@@ -136,6 +136,13 @@ class CLIOutput(object):
                 raise e
                 exit(0)
 
+            check_sensor = path.rsplit('.', 1)
+
+            if len(check_sensor) >= 2:
+                if check_sensor[1] in ['un~', 'rar', 'zip', '7z', 'gz', 'xz', 'bak', 'tar', 'swp', 'swn', 'swo', 'swl', 'swm', 'bak~', 'back'] or check_sensor[1].endswith('~') or check_sensor[1].endswith('~1') or check_sensor[1].endswith('~2') or check_sensor[1].endswith('~3'):
+                    if 'application/octet-stream' not in response.headers['content-type']:
+                        return
+
             if status == 200:
                 message = Fore.GREEN + message + Style.RESET_ALL
             elif status == 403:
@@ -223,3 +230,4 @@ if __name__ == '__main__':
 
     print(os.path.dirname(os.path.realpath(__file__)) +
           '/../../report/{}'.format(url.split('//')[1].rstrip('/')))
+

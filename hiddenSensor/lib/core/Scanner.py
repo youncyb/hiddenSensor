@@ -46,7 +46,7 @@ class Scanner(object):
                 try:
                     status, response = self.scan(path)
                     if status is not None:
-                        if response.status_code == 200 and response.history == [] and self.sensor:
+                        if response.status_code in [200, 301, 302, 303, 307] and self.sensor:
                             self.dictionary.addSensor(path)
                         full_path = urllib.parse.urlparse(
                             self.requester.url).path + path
@@ -109,3 +109,4 @@ if __name__ == '__main__':
         except(KeyboardInterrupt, SystemExit) as e:
             print('get ctrl + c')
             break
+

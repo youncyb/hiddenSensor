@@ -1,6 +1,8 @@
 # hiddenSensor
 webdir scan，it works for ctf and actual combat
 
+**更新到0.2版本，提高了--ctf的识别率**
+
 #### 1. 支持平台      
 **macOS|Linux|Windows**  
 **python3**

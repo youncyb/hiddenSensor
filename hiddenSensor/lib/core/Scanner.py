@@ -92,21 +92,3 @@ class Scanner(object):
             t.start()
         self.threadResume()
 
-
-if __name__ == '__main__':
-    dictionary = Dictionary(
-        '/Users/youncyb/Desktop/Tools/dirsearch-master/db/dicc.txt', 'php')
-    print(dictionary.entries)
-
-    requester = Requester('https://www.baidu.com')
-    scanner = Scanner(requester, dictionary)
-    scanner.start()
-    while True:
-        try:
-            while not scanner.over():
-                continue
-            break
-        except(KeyboardInterrupt, SystemExit) as e:
-            print('get ctrl + c')
-            break
-

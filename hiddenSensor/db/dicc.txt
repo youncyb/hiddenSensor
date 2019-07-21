@@ -5313,6 +5313,7 @@ styles/prosilver/style.cfg
 sub-login/
 subadmin
 submit
+submit.%EXT%
 submit_article.%EXT%
 subscribe
 subscribe.html

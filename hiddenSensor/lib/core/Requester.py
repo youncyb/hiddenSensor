@@ -6,6 +6,7 @@ import urllib
 import socket
 import random
 import time
+from requests.packages import urllib3
 
 
 class RequesterException(Exception):
@@ -13,7 +14,7 @@ class RequesterException(Exception):
 
 
 class Requester(object):
-    def __init__(self, url, header=None, useragent=None, cookies=None, proxy=None, delay=0, timeout=30, random_agent=False, random_agents=None, max_retries=5):
+    def __init__(self, url, header=None, useragent=None, verify=None, cookies=None, proxy=None, delay=0, timeout=30, random_agent=False, random_agents=None, max_retries=5):
         self.url = self.parse_url(url)
         self.cookies = self.setCookies(cookies)
         self.headers = self.setHeaders(header, useragent)
@@ -24,6 +25,10 @@ class Requester(object):
         self.max_retries = max_retries
         self.timeout = timeout
         self.session = requests.Session()
+        if verify == None:
+            self.verify = True
+        else:
+            self.verify = verify
 
     def parse_url(self, url):
         if not url.endswith('/'):
@@ -87,8 +92,9 @@ class Requester(object):
                 if self.random_agent == True:
                     self.headers['User-Agent'] = random.choice(
                         self.random_agents)
+                urllib3.disable_warnings()
                 respone = self.session.get(
-                    self.url + path, proxies=self.proxy, allow_redirects=real_redirect, headers=self.headers, cookies=self.cookies, timeout=self.timeout)
+                    self.url + path, proxies=self.proxy, allow_redirects=real_redirect, verify=self.verify, headers=self.headers, cookies=self.cookies, timeout=self.timeout)
                 time.sleep(self.delay)
                 break
             except requests.exceptions.TooManyRedirects as e:
@@ -107,8 +113,3 @@ class Requester(object):
             raise RequesterException(
                 {'message': 'Connection timeout: There was a problem in the request to: {0}'.format(path)})
         return respone
-
-
-if __name__ == '__main__':
-    req = Requester('https://www.youncyb.cn/wp-content')
-    print(req.request('/index.php').text)

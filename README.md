@@ -45,6 +45,7 @@ connection settings:
   --timeout TIMEOUT     max time every request is waiting (default: 30 s)
   -m MAX_RETRIES, --max-retries MAX_RETRIES
                         max retries when meeting network problem (default: 5)
+  --verify              if ssl error occured, process will disable ssl verify
 
 other settings:
   -t THREADS_COUNT, --thread THREADS_COUNT

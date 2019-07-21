@@ -236,9 +236,3 @@ class CLIOutput(object):
         self.newLine(config)
 
 
-if __name__ == '__main__':
-    url = 'https://www.youncyb.cn'
-
-    print(os.path.dirname(os.path.realpath(__file__)) +
-          '/../../report/{}'.format(url.split('//')[1].rstrip('/')))
-

@@ -147,10 +147,3 @@ class Fuzzer(object):
             elif any(redirectToInvalid) and ((self.base_ratio - 0.15) <= ratio_php or (self.base_ratio - 0.15) <= ratio_jsp or (self.base_ratio - 0.15) <= ratio_asp):
                 return False
             return True
-
-
-if __name__ == '__main__':
-    req = Requester('https://www.baidu.com/')
-    fuzzer = Fuzzer(req)
-    print(fuzzer.fuzz(requests.get('https://www.baidu.com/hello.php')))
-

@@ -28,7 +28,8 @@ class Controller(object):
         self.random_agent = arguments.random_agent
         self.dictionary = Dictionary(
             arguments.wordList, arguments.lowercase, arguments.uppercase, arguments.extension)
-        self.output.header(open(os.path.dirname(__file__) + '/banner.txt', 'r').read())
+        self.output.header(open(os.path.dirname(
+            __file__) + '/banner.txt', 'r').read())
         self.output.configReport(arguments.extension, str(arguments.threads_count), str(len(
             self.dictionary)), str(self.recursive), str(arguments.delay), str(arguments.timeout))
         self.urlList = arguments.urlList
@@ -39,7 +40,7 @@ class Controller(object):
                     self.output.targetReport(url)
                     try:
 
-                        self.requester = Requester(url, arguments.headers, arguments.user_agent, arguments.cookies, arguments.proxy,
+                        self.requester = Requester(url, arguments.headers, arguments.user_agent, arguments.crt, arguments.cookies, arguments.proxy,
                                                    arguments.delay, arguments.timeout, arguments.random_agent, self.random_agents, arguments.max_retries)
                         self.requester.request('/')
                     except RequesterException as e:
@@ -57,7 +58,8 @@ class Controller(object):
             self.output.error('\nexit by user')
             exit(0)
         finally:
-            self.output.warning('Scanning Over! Result stores in report folder')
+            self.output.warning(
+                'Scanning Over! Result stores in report folder')
 
     def recursive_path(self, url):
         if self.recursive >= 1:

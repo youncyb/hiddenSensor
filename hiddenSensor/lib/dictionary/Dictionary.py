@@ -78,10 +78,3 @@ class Dictionary(object):
 
     def __len__(self):
         return len(self.dicts)
-
-
-if __name__ == '__main__':
-    dictionary = Dictionary(
-        '/Users/youncyb/Desktop/Tools/dirsearch-master/db/dicc.txt')
-    print(dictionary.dicts, len(dictionary), next(dictionary))
-

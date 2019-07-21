@@ -39,6 +39,7 @@ class Argument(object):
         self.uppercase = args.uppercase
         self.wordList = args.wordList
         self.sensor = args.ctf
+        self.crt = args.verify
 
     def parseArguments(self):
         parser = argparse.ArgumentParser()
@@ -69,6 +70,8 @@ class Argument(object):
                             action='store', dest='timeout', default=30)
         group2.add_argument('-m', '--max-retries', type=int, help='max retries when meeting network problem (default: 5)',
                             action='store', dest='max_retries', default=5)
+        group2.add_argument('--verify', help='if ssl error occured, process will disable ssl verify',
+                            action='store_false', dest='verify')
 
         group3 = parser.add_argument_group('other settings')
         group3.add_argument('-t', '--thread', type=int, help='max thread count you want to specify (default: 10)',

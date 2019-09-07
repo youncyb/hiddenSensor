@@ -36,7 +36,14 @@ class Requester(object):
         url_p = urllib.parse.urlparse(url)
         if url_p.scheme != 'http' and url_p.scheme != 'https':
             url_p = urllib.parse.urlparse('http://' + url)
-        domain = url_p.netloc
+
+        domain = url_p.netloc.split(':')
+        if len(domain) == 2:
+            port = domain[1]
+            domain = domain[0]
+        else:
+            domain = domain[0]
+            port = ''
         try:
             host = socket.gethostbyname(domain)
         except socket.gaierror:

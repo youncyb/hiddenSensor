@@ -1,6 +1,10 @@
 # hiddenSensor
 webdir scan，it works for ctf and actual combat
 
+**2019/09/07 更新V0.3：修复了端口识别错误**
+
+**2019/07/28 更新V0.21：修复了SSL证书连接错误，可添加--verify解决**
+
 **更新到0.2版本，提高了--ctf的识别率**
 
 #### 1. 支持平台      
